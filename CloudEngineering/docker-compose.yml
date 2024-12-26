@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+  consul:
+    image: consul:1.15.4
+    ports:
+      - "8500:8500" 
+    command: agent -dev -client=0.0.0.0
+    networks:
+      - app_network
+
+  redactor_pdf:
+    build:
+      context: ./RedactorPDF
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - CONSUL_HTTP_ADDR=http://consul:8500 
+    networks:
+      - app_network
+    depends_on:
+      - consul
+
+  web_app:
+    build:
+      context: ./WebApp
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    networks:
+      - app_network
+    depends_on:
+      - redactor_pdf
+
+networks:
+  app_network:
+    driver: bridge

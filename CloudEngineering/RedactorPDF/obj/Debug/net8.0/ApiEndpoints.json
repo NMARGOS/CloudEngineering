@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "RedactorPDFController",
+    "Method": "RedactText",
+    "RelativePath": "api/RedactorPDF/redactEndpoint",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PdfRedactorRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

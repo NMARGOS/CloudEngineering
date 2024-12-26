@@ -1,0 +1,22 @@
+﻿@page 
+@model WebApp.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>Welcome</h1>
+<form method="post" asp-antiforgery="false">
+    <label asp-for="Input">Text desired to redact:</label>
+    <input asp-for="Input" class="form-control" />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@if (!string.IsNullOrEmpty(ViewData["Error"] as string))
+{
+    <p style="color:red">@ViewData["Error"]</p>
+}
+
+@if (!string.IsNullOrEmpty(Model.DownloadUrl))
+{
+    <p>Download your redacted PDF: <a href="@Model.DownloadUrl" download>Redacted PDF</a></p>
+}
